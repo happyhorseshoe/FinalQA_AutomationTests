@@ -18,5 +18,24 @@ namespace AutomatedTesting.PageObjectModels
 
         string signinIcon = ("authorization-link");
         internal By SigninIcon { get => By.ClassName(signinIcon); }
+
+
+        string emailInput = "email";
+        internal By EmailInput { get => By.Id(emailInput); }
+
+
+        string passwordInput = "password";
+        internal By PasswordInput { get => By.Id(passwordInput); }
+
+        internal string validEmail = "roni_cost@example.com";
+        internal string validPassword = "roni_cost3@example.com";
+
+
+        string emailError = "email-error";
+        internal By EmailError { get => By.Id(emailError); }
+
+
+        string passwordError = "pass-error";
+        internal By PasswordError { get => By.Id(passwordError); }
     }
 }

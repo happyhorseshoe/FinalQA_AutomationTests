@@ -170,7 +170,14 @@ namespace AutomatedTesting.ClassTests
         }
 
 
-       
+        [Fact]
+        public void LoginWithBlankUserName()
+        {
+          
+        _driver.Navigate().GoToUrl(_lumaSigninPage.SigninPageUrl);
+         //_lumaSigninPage.EmailInput();
+        
+        }
 
 
 
