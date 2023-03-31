@@ -16,9 +16,9 @@ using System.Xml.Linq;
 using System.Security.Cryptography.X509Certificates;
 using SeleniumExtras.WaitHelpers;
 
-namespace AutomatedTesting
+namespace AutomatedTesting.ClassTests
 {
-    public class AutoTestingUI //: IDisposable
+    public class AutoTestingUI : IDisposable
     {
         readonly ITestOutputHelper output;
         IWebDriver _driver;
@@ -27,8 +27,9 @@ namespace AutomatedTesting
         EbayHome _ebayHome;
         LumaLandingPage _lumaLandingPage;
         LumaSigninPage _lumaSigninPage;
+        NewTabDemoSitePractice _newTabDemoSitePractice;
 
-        public AutoTestingUI(ITestOutputHelper output) //might not need IWebDriver
+        public AutoTestingUI(ITestOutputHelper output)
         {
             this.output = output;
             _driver = new ChromeDriver();
@@ -44,6 +45,9 @@ namespace AutomatedTesting
 
             LumaSigninPage lumaSigninPage = new LumaSigninPage();
             _lumaSigninPage = lumaSigninPage;
+
+            NewTabDemoSitePractice newTabDemoSitePractice = new NewTabDemoSitePractice();
+            _newTabDemoSitePractice = newTabDemoSitePractice;
 
         }
 
@@ -92,8 +96,8 @@ namespace AutomatedTesting
             Actions action = new Actions(_driver);
             WebElement elementNew = (WebElement)_driver.FindElement(_lumaLandingPage.HoveringOverTraining);
             action.MoveToElement(elementNew).Build().Perform();
-            WebDriverWait wait = new WebDriverWait(_driver,TimeSpan.FromSeconds(3));
-           
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
+
 
             _driver.FindElement(_lumaLandingPage.DownloadLink).Displayed.Should().BeTrue();
         }
@@ -138,7 +142,18 @@ namespace AutomatedTesting
 
         [Fact]
         public void NewTabTest()
-        {
+        { 
+            string dayOfTheWeek = "Friday";
+            _driver.Navigate().GoToUrl(_newTabDemoSitePractice.DemoUrl);
+
+            SelectElement dropDown = new SelectElement(_driver.FindElement(_newTabDemoSitePractice.DropDownMenu));
+            dropDown.SelectByValue(dayOfTheWeek);
+            string actualText = _driver.FindElement(_newTabDemoSitePractice.Friday).Text;
+               
+           
+            actualText.Should().Contain(dayOfTheWeek);
+
+           
 
         }
 
@@ -153,10 +168,10 @@ namespace AutomatedTesting
 
 
 
-        //public void Dispose()
-        //{
-        //    _driver.Quit();
-        //}
+        public void Dispose()
+        {
+            _driver.Quit();
+        }
 
 
 
