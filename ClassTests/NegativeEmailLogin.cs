@@ -29,6 +29,18 @@ namespace AutomatedTesting.ClassTests
             Assert.Contains("Your username is invalid", driver.PageSource);
         }
 
+        [Fact]
+        public void InvalidUPasswordTest()
+        {
+            driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/login");
+
+            driver.FindElement(By.Id("username")).SendKeys("tomsmith");
+            driver.FindElement(By.Id("password")).SendKeys("invalid");
+            driver.FindElement(By.CssSelector("button[type='submit']")).Click();
+
+            Assert.Contains("Your password is invalid!", driver.PageSource);
+        }
+
 
         public void Dispose()
         {

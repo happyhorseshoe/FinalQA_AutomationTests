@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-namespace AutomatedTesting.ClassTests
+namespace AutomatedTesting.PageObjectModels
 {
     internal class UpLoadImage
     {
