@@ -28,6 +28,7 @@ namespace AutomatedTesting.ClassTests
         LumaLandingPage _lumaLandingPage;
         LumaSigninPage _lumaSigninPage;
         NewTabDemoSitePractice _newTabDemoSitePractice;
+        UpLoadImage _upLoadImage;
 
         public AutoTestingUI(ITestOutputHelper output)
         {
@@ -49,6 +50,8 @@ namespace AutomatedTesting.ClassTests
             NewTabDemoSitePractice newTabDemoSitePractice = new NewTabDemoSitePractice();
             _newTabDemoSitePractice = newTabDemoSitePractice;
 
+            UpLoadImage upLoadImage = new UpLoadImage();
+            _upLoadImage = upLoadImage;
         }
 
         [Fact]
@@ -151,17 +154,23 @@ namespace AutomatedTesting.ClassTests
             string actualText = _driver.FindElement(_newTabDemoSitePractice.Friday).Text;
                
            
-            actualText.Should().Contain(dayOfTheWeek);
-
-           
+            actualText.Should().Contain(dayOfTheWeek);  
 
         }
 
+        [Fact]
+        public void FileUploaderTest()
+        {
+            _driver.Navigate().GoToUrl(_upLoadImage.FileUploadUrl);
+
+            _driver.FindElement(_upLoadImage.ChooseFileImage).SendKeys(@"C:\Users\emorr\OneDrive\Desktop\New\TestProject1\pantaloons.png");
+            _driver.FindElement(_upLoadImage.FileUploader).Click();
+            
+            _driver.FindElement(_upLoadImage.FileUploader).Displayed.Should().BeTrue();
+        }
 
 
-
-
-
+       
 
 
 
